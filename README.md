@@ -4,7 +4,11 @@ These are my private (at least for now) notes that I'll keep on growing to under
 
 ## Style guide
 
-These notes are done in Markdown. Don't cut down long paragraphs to support proper automatic resizing of the paragraphs. This is why `textwidth` setting isn't set in my `~/.vimrc`:
+These notes are done in Markdown.
+
+### Text width and resizing
+
+Don't cut down long paragraphs to support proper automatic resizing of the paragraphs. This is why `textwidth` setting isn't set in my `~/.vimrc`:
 
 ```vim
 augroup vimrcEx
@@ -13,11 +17,17 @@ augroup vimrcEx
 augroup END
 ```
 
+### Headings
+
 Always, I mean ALWAYS, use proper heading hierarchy: h1 > h2 > h3 > ...
 
-Use stars (\*) for normal text formatting (*italic* and **bold**).
+### Text formatting
 
-Use dashes (\-) for list items.
+Use stars (`*`) for normal text formatting (*italic* and **bold**).
+
+### List items
+
+Use dashes (`-`) for list items.
 
 ---
 &copy; 2023 Teemu Viikeri
