@@ -50,3 +50,12 @@ Note: Dan Abramov, developer of React, Redux and Create React App, does mention 
 
 The main take away from Jim regarding this matter is that we shouldn't try to replace what web already has provided us for years. We already have HTML and the web APIs. We don't need to replace it, we need to *augment* and *enhance* it. Jim also arguments that it's also a good bet for in the long game because there have been multiple times when previous attempts to replace the old standard and create something totally new have actually resulted in augmenting these ideas into the browser as well. Jim mentions the following technologies: HTML5 augmented XHTML5, networking libraries were brought into `fetch`, Sass and jQuery were ported into browser and Typescript as well.
 
+### Upcoming articles and material
+
+- As Good as HTML: [https://blog.jim-nielsen.com/2023/as-good-as-html/](https://blog.jim-nielsen.com/2023/as-good-as-html/)
+- There’s TypeScript and Then There’s TypeScript: [https://blog.jim-nielsen.com/2023/the-flavors-of-typescript/](https://blog.jim-nielsen.com/2023/the-flavors-of-typescript/)
+- Better Apps: Delivering Universal UI Patterns as Web Components: [https://www.youtube.com/watch?v=mtHf7crZZIQ](https://www.youtube.com/watch?v=mtHf7crZZIQ)
+- Component.Kitchen: [https://component.kitchen/](https://component.kitchen/)
+- Using Web Components on My Icon Galleries Websites: [https://blog.jim-nielsen.com/2023/web-components-icon-galleries/](https://blog.jim-nielsen.com/2023/web-components-icon-galleries/)
+- Blinded By the Light DOM: [https://meyerweb.com/eric/thoughts/2023/11/01/blinded-by-the-light-dom/](https://meyerweb.com/eric/thoughts/2023/11/01/blinded-by-the-light-dom/)
+
