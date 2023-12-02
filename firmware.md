@@ -7,3 +7,7 @@ Ubuntu Wiki has its own page for explaining what a firmware is. Here's a citatio
 ## How to update firmware
 
 In Ubuntu, there's a `fwupd` system daemon that enables firmware updates via [LVFS](https://fwupd.org/), Linux Vendor Firmware Service, a free portal for hardware vendors to upload firmware updates. The latest Ubuntu version, 23.10 (Mantic Minotaur), comes with a new `firmware-updater` software created with Flutter and is installed via Snap. The software is a new GUI for using `fwupd`. Firmware updates can also be installed via a command-line utility tool `fwupdmgr` which communicates with `fwupd` daemon.
+
+## dbx
+
+UEFI Revocation List File, commonly known as `dbx` file, works as a blacklist file for non-trusted software, including firmware, that aren't allowed to be run when Secure Boot is enabled. UEFI dbx is updated with new revocations via LVFS and `fwupd`. 
