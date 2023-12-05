@@ -49,3 +49,36 @@ The full information what variables these processors add to the context can be c
 #### Built-ins
 
 When using a tag or a filter which is not built-in in Django, it needs to be loaded first in the template with `{% load ... %}` tag. If the tag or a filter is included in the `builtins` list on `OPTIONS`, the tag or the filter can be used without loading it first. If the builtins is used, it does not override default built-ins by Django, it just adds the specied tags and filters to the default ones.
+
+## Queryset
+
+### Methods
+
+#### `bulk_update`
+
+Efficiently updates given fields on provided model instances generally with one SQL query. Returns the number of updates objects.
+
+This is more efficient than iterating through a list of model instances and calling `save()` on them but there are couple things to remember:
+- `save()` isn't called internally so `pre_save` and `post_save` signals aren't sent
+- use `batch_size` to avoid generating too big of an SQL query
+- when a batch contains duplicates, only first instance is updated
+
+#### Syntax
+
+```python
+bulk_update(objs, fields, batch_size=None)
+``` 
+
+##### Example
+
+```bash
+>>> objs = [
+...     Entry.objects.create(headline="Entry 1"),
+...     Entry.objects.create(headline="Entry 2"),
+... ]
+>>> objs[0].headline = "This is entry 1"
+>>> objs[1].headline = "This is entry 2"
+>>> Entry.objects.bulk_update(objs, ["headline"])
+2
+```
+
