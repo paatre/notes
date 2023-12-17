@@ -1,4 +1,4 @@
-# Django
+ Django
 
 ## Templates
 
@@ -82,3 +82,141 @@ bulk_update(objs, fields, batch_size=None)
 2
 ```
 
+## Logging
+
+Instead of using `print()`, it is possible to debug what's happening in Django with loggers. Django uses Python's builtin `logging` module.
+
+Logging in Python and Django involves four different parts:
+
+1. Loggers
+2. Handlers
+3. Filters
+4. Formatters
+
+### Loggers
+
+Lorem ipsum.
+
+### Handlers
+
+Lorem ipsum.
+
+### Filters
+
+Lorem ipsum.
+
+### Formatters
+
+Lorem ipsum.
+
+### Propagation
+
+Loggers are named hierarchically like modules are. So there can be both `django` and `django.server` loggers defined in a logging configuration. To send a log record, a logger instance needs to be ontained first by calling `logging.getLogger(name)`. When you provide a name for the logger, for example `logging.getLogger("django.server")`, log records are sent to the `django.server` logger in the current file. `django.server` will process the log record first but then it will get *propagated* to its parents in the logger hierarchy, `django` on this case, which will also handle the record with its handlers. 
+
+Loggers can have a `propagate` setting set as `False` (defaults to `True`) which blocks the propagation.
+
+### Logging configuration
+
+When a Django application is spun up via WSGI or ASGI, `django.setup()` function is called. The function setups logging and installed apps configurations. For logging purposes, the interesting part is
+
+```python
+def setup(set_prefix=True):
+    ...
+    from django.conf import settings
+    ...
+    from django.utils.log import configure_logging
+    
+    configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+    ...
+```
+
+By default, `settings.LOGGING_CONFIG` and `settings.LOGGING` have the following values:
+
+```shell
+>>> from django.conf import settings
+>>> settings.LOGGING_CONFIG
+'logging.config.dictConfig'
+>>> settings.LOGGING
+{}
+```
+
+Django uses `dictConfig` format for configuring logging. `dictConfig` comes from Python's standard library's `logging` module as a function which handles the whole configuration process. In Django, logging configuration can come from other places and formats than `dictConfig` but that is the default one. The `configure_logging()` imports the logging configuration function that has been set for the Django project. Then, Django configures default logging configurations with `dictConfig` and `DEFAULT_LOGGING`, and then extends/overrides the configurations with custom settings, `logging_settings`.
+
+```python
+# Default logging for Django. This sends an email to the site admins on every
+# HTTP 500 error. Depending on DEBUG, all other log records are either sent to
+# the console (DEBUG=True) or discarded (DEBUG=False) by means of the
+# require_debug_true filter. This configuration is quoted in
+# docs/ref/logging.txt; please amend it there if edited here.
+DEFAULT_LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        },
+        "require_debug_true": {
+            "()": "django.utils.log.RequireDebugTrue",
+        },
+    },
+    "formatters": {
+        "django.server": {
+            "()": "django.utils.log.ServerFormatter",
+            "format": "[{server_time}] {message}",
+            "style": "{",
+        }
+    },
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "filters": ["require_debug_true"],
+            "class": "logging.StreamHandler",
+        },
+        "django.server": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "django.server",
+        },
+        "mail_admins": {
+            "level": "ERROR",
+            "filters": ["require_debug_false"],
+            "class": "django.utils.log.AdminEmailHandler",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "mail_admins"],
+            "level": "INFO",
+        },
+        "django.server": {
+            "handlers": ["django.server"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
+
+
+def configure_logging(logging_config, logging_settings):
+    if logging_config:
+        # First find the logging configuration function ...
+        logging_config_func = import_string(logging_config)
+
+        logging.config.dictConfig(DEFAULT_LOGGING)
+
+        # ... then invoke it with the logging settings
+        if logging_settings:
+            logging_config_func(logging_settings)
+```
+
+This setup gives the possibility to add own configuration functions and configurations on top of Django's defaults.
+
+#### Defaults
+
+The default logging configuration includes preset loggers, handlers, formatters and filters.
+
+
+
+## Settings
+
+Lorem ipsum.
