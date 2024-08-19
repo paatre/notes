@@ -220,3 +220,43 @@ The default logging configuration includes preset loggers, handlers, formatters 
 ## Settings
 
 Lorem ipsum.
+
+## Views
+
+### Generic views
+
+#### `View`
+
+The most basic view class that is used to create views. Uses `dispatch` to handle HTTP requests and calls the correct method based on the request method. If the method handler is not provided in the class, a `404 Not Found` is returned. `http_method_names` list attribute may be used to define which methods are allowed. By default, all methods are allowed. If a request's method is not on the list, a `405 Method Not Allowed` response is returned.
+
+#### `TemplateResponseMixin`
+
+The class uses `render_to_response` method to render a template with a context. Uses `template_name` attribute to get the correct template.
+
+#### `SingleObjectTemplateResponseMixin`
+
+Inherits: `TemplateResponseMixin`
+
+On top of using a `template_name` attribute to provide a correct template, you can also provide a `template_name_field` attribute which is used to get the template name from a field of an object instance that is being displayed. The displayed object should be assigned into `self.object` (usually via `get_object`). This is useful when you have a model that has a field that contains the template name. Third, you can provide a `template_name_suffix` attribute which is used to append a suffix to the app label and the object's model name. The suffix is `_detail` by default. With this, you can just create a template with the name `app_label/model_name_suffix.html` and it will be used automatically, with no need to provide a `template_name` attribute explicitly.
+
+#### `ContextMixin`
+
+Passes a context to the template when rendering. The context is provided by the `get_context_data` method. The method returns a dictionary which is then passed to the template. `extra_context` attribute can be used to provide additional context to the template.
+
+#### `SingleObjectMixin`
+
+Inherits: `ContextMixin`
+
+Fetches a single object for a given `model` from the database with a `get_object` method. Especially `pk` and `slug` are used as the filter arguments, which are usually passed as kwargs to the view from named URL patterns. The class already implements the `get_queryset` method which returns the `all` queryset of the model. The method can be overridden to provide a custom queryset. The `get_context_data` method is overridden to provide the object to the context.
+
+#### `BaseDetailView`
+
+Inherits: `SingleObjectMixin`, `View`
+
+Implements a `get` method which calls `get_object` to pass a single object to the context. The method also calls `render_to_response` to render the template with the context. Use attributes from inherited classes to provide the correct model, template, etc.
+
+#### `DetailView`
+
+Inherits: `SingleObjectTemplateResponseMixin`, `BaseDetailView`
+
+This view is used to display a detail page for a single object. The class doesn't have any methods of its own but uses the inherited methods to fetch the object and render the template.
