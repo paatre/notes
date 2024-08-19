@@ -30,6 +30,19 @@ $ dig google.com AAAA
 google.com.		154	IN	AAAA	2a00:1450:4026:804::200e
 ```
 
+### CNAME record
+
+The "CNAME" stands for "canonical name" and this record is used to create an alias from one domain to another.
+
+```sh
+$ dig www.github.com CNAME
+
+;; QUESTION SECTION:
+;www.github.com.			IN	CNAME
+
+;; ANSWER SECTION:
+www.github.com.		3346	IN	CNAME	github.com.
+```
 ### IN class
 
 The "IN" stands for "Internet" and is the class of the record. It's the most common class used in DNS involving Internet hostnames, servers, or IP addresses.
