@@ -2,7 +2,7 @@
 
 ## Folding
 
-A new fold can be created with `zf`. A fold can be opened and closed with `zo` and `zc`, respectively.
+A new fold can be created with `zf`. A fold can be opened and closed with `zo` and `zc`, respectively, but this affects only one level of fold. A count can also be given to these command which opens and closes that many levels of fold. Using the capital letter version of the commands, `zO` and `zF`, opens and closes all fold levels. `za` works as a toggle for the fold and `zA` is a recursive version of the toggle.
 
 ## Filetypes
 
