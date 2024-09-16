@@ -13,14 +13,16 @@ Here's an overview timeline of Python packaging history:
 ```mermaid
 timeline
   title Python packaging history
-  1991: First release of Python (v0.9.0)
-  1996: site customization hook added
-  2000: distutils publically released
-  2001: PKG-INFO defined as the metadata standard (PEP 241)
-  2003: PyPI launched (PEP 301)
-  2004: Work on Setuptools started
-  2013: Version 1.0 of Setuptools released
-  2014: distutils recommends Setuptools
+  1991 : First release of Python (v0.9.0)
+  1996 : Site customization hook added
+  2000 : distutils publically released
+  2001 : PKG-INFO defined as the metadata standard (PEP 241)
+  2003 : PyPI launched (PEP 301)
+  2004 : Work on Setuptools started
+  2005 : Setuptools introduced egg distribution format
+       : Setuptools introduced easy_install
+  2013 : Version 1.0 of Setuptools released
+  2014 : distutils recommends Setuptools
 ```
 
 #### site-packages
@@ -57,9 +59,11 @@ Even though `distutils` was a significant step forward, and the ecosystem now ev
 
 That lead to the development of a third-party (compared to Python and its standard library) solution that could add the needed features to the ecosystem. In 2004, work on a tool called Setuptools started. Setuptools was built as an extension on top of `distutils`, providing new features to the current tooling, and not creating a totally separate one.
 
-On top of working on the automatic dependency installation, Setuptools also started to work on documentation and how to figure out what distributions are installed on the system. The latter was planned to be done by creating a database of installed distributions, as was already described in PEP 262 in 2001.
+On top of working on the automatic dependency installation, Setuptools also started to work on documentation, and how to figure out what distributions are installed on the system. The latter was planned to be done by creating a database of installed distributions, as was already described in PEP 262 in 2001.
 
+By 2005, Setuptools introduced two new enhancements to the Python packaging ecosystem: `egg` distribution format and `easy_install` package installer.
 
+Egg distribution format was a new way to distribute Python packages. TODO: Write more about the egg format.
 
 Version 1.0 of Setuptools was released in 2013, and from the release of Python 3.4 in 2014 onwards, `distutils` recommended using Setuptools instead of directly using `distutils`, in its standard library documentation.
 
@@ -93,3 +97,5 @@ This section lists history references used in this note. They provide more detai
 - [History of packaging](https://the-hitchhikers-guide-to-packaging.readthedocs.io/en/latest/history.html)
 - [Extra: A History of Python Build Tools](https://carpentries-incubator.github.io/python_packaging/instructor/04-history-of-packaging.html)
 - [SIG for Python Resource Catalog](https://www.python.org/community/sigs/retired/catalog-sig/)
+- [Initial checkin of setuptools 0.0.1](https://github.com/pypa/setuptools/commit/8423e1ed14ac1691c2863c6e8cac9230cf558d7b)
+- [Setuptools History](https://setuptools.pypa.io/en/latest/history.html)
