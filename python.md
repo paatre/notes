@@ -99,3 +99,13 @@ This section lists history references used in this note. They provide more detai
 - [SIG for Python Resource Catalog](https://www.python.org/community/sigs/retired/catalog-sig/)
 - [Initial checkin of setuptools 0.0.1](https://github.com/pypa/setuptools/commit/8423e1ed14ac1691c2863c6e8cac9230cf558d7b)
 - [Setuptools History](https://setuptools.pypa.io/en/latest/history.html)
+
+## Testing
+
+This section describes how to test Python code.
+
+### Mocking
+
+Mocking is a technique used in testing to replace parts of the system under test with mock objects.
+Mock objects are objects that simulate the behavior of real objects.
+They are used to isolate the code under test and to focus on the behavior of the code itself.
