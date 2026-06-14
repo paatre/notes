@@ -1,76 +1,87 @@
 # Networking basics
 
-Networking is a field of a wide variety of topics. Within this note we focus on the basics of networking and its fundamental issues that we can identify. We go through the topics with a layered approach where networking is broken down into different layers so we can understand the different responsibilities of each part of the network stack and how they interact with each other.
+Networking covers a wide variety of topics. This note focuses on the foundational concepts and core issues of networking. 
 
-Transport layer:
+We approach these topics using a **layered model**, breaking the network stack down into distinct layers to understand their individual responsibilities and how they interact with each other.
 
-- reliable communication over an unreliable network layer
-- connection establishment/teardown and handshaking
-- congestion and flow control
-- multiplexing
+---
 
-Network layer:
+## Primary principles of networking
 
-- determining "good" paths between two routers
-- interconnecting a large number of heterogeneous networks
-- managing the complexity of a modern network
+Before diving into the models, here is a snapshot of what each primary layer is trying to solve:
 
-Link layer:
+* **Transport layer:** Achieves *reliable* communication over an *unreliable* network layer. Handles connection handshakes, congestion/flow control, and multiplexing.
+* **Network layer:** Determines "good" paths between routers, interconnects massive numbers of heterogeneous networks, and manages modern routing complexity.
+* **Link layer:** Manages how multiple devices share a single physical communication channel.
+* **Network security:** Ensures confidentiality, authentication, and message integrity across all interactions.
 
-- sharing a multiple access channel
+---
 
-Network security:
+## Architectural models: OSI vs. TCP/IP
 
-- condidentiality
-- authentication
-- mmessage integrity
+To design and understand network systems, we use conceptual frameworks. The two most prominent are the theoretical **OSI model** (7 layers) and the practical **TCP/IP model** (4 layers).
 
-## Resources behind this note
+| OSI layer | OSI name | Main responsibility | Example protocols / standards | Corresponding TCP/IP layer |
+| :---: | :--- | :--- | :--- | :--- |
+| **7** | Application | Network services for end-user apps | HTTP, SMTP, DNS | Layer 4: **Application** *(Combines OSI 5, 6, 7)* |
+| **6** | Presentation | Data formatting, encryption, compression | ASCII, JPEG, SSL/TLS | Layer 4: **Application** |
+| **5** | Session | Managing communication sessions | NetBIOS, RPC | Layer 4: **Application** |
+| **4** | Transport | End-to-end data transfer, error handling | **TCP, UDP** | Layer 3: **Transport** |
+| **3** | Network | Routing, path selection, global addressing | **IP** | Layer 2: **Network** |
+| **2** | Data link | Local node-to-node delivery, framing | Ethernet, Wi-Fi | Layer 1: **Link** *(Combines OSI 1, 2)* |
+| **1** | Physical | Raw binary transmission over physical media | Cables, Radio waves | Layer 1: **Link** |
 
-1. Computer Networking: A Top-Down Approach by Kurose and Ross (9th edition, 2025)
-2. Computerphile's series on networking basics with Richard G Clegg: https://www.youtube.com/watch?v=eelvWAURfdI&list=PLzH6n4zXuckpvez0PrA5J2Wv--g_vyVs8&index=5
 
-## Terminology
 
-- Packet/datagram: a unit of data that is transmitted over a network. It contains the source and destination addresses, as well as the data payload.
+> **A historical note:**
+> While the OSI model was being developed by committee in the 1970s and 1980s, the **TCP/IP model** was already being built and deployed by the US Department of Defense for ARPANET/DARPA projects. Because of its real-world implementation and rapid adoption, TCP/IP became the internet standard. Today, the OSI model is used primarily as a theoretical reference.
 
-## OSI ISO model
+---
 
-The OSI ISO model is a conceptual framework used to understand and design network systems. It divides the communication process into seven layers, each with specific functions and responsibilities. The layers are:
-
-7: Application: provides network services to end-users and applications, such as email, web browsing, games, etc.
-6: Presentation: responsible for data representation, encryption, compression, etc. (e.g., ASCII, JPEG, SSL/TLS)
-5: Session: responsible for establishing, managing, and terminating communication sessions between applications
-4: Transport: responsible for reliable data transfers, retransmissions, error handling, etc (TCP, UDP)
-3: Network: responsible for routing, path selection, addressing, etc. (IP)
-2: Data link: responsible for data delivery between adjacent nodes through network interfaces and firmware (Ethernet, Wi-Fi, etc.)
-1: Physical: responsible for the physical transmission of data as binary data over the network medium, such as cables, radio waves, etc.
-
-But when OSI ISO model was being developed during 1970s and 1980s, the TCIP/IP model was also already being developed and implemented by the US Department of Defense for ARPANET and DARPA projects. And because of the practical implementation and widespread adoption of TCP/IP, the OSI ISO model never gained much traction in the real world and is mostly used as a theoretical reference for understanding network communication.
-
-## TCP/IP model
-
-The TCP/IP model is a more practical and widely used model for network communication. It consists of four layers that correspond to the OSI ISO model as follows:
-
-7: Application (combines OSI layers 5, 6, and 7)
-4: Transport (corresponds to OSI layer 4)
-3: Network (corresponds to OSI layer 3)
-2: Link (corresponds to OSI layers 1 and 2)
+## TCP/IP model: deep dive
 
 ### Transport layer
 
-The transport layer is responsible for providing reliable data transfer between applications. It ensures that data is delivered to the correct destination, to the correct application, and in the correct order. The two main protocols used in the transport layer are TCP (Transmission Control Protocol) and UDP (User Datagram Protocol).
+The transport layer provides data transfer between applications running on different hosts. It ensures data reaches the correct destination application, in the correct order, and free of errors.
 
-Ports are used to identify specific applications or services running on a host. They are 16-bit numbers that range from 0 to 65535. Ports 0 to 1023 are known as well-known ports and are reserved for specific services (e.g., HTTP uses port 80, HTTPS uses port 443, FTP uses port 21, etc.). Ports 1024 to 49151 are known as registered ports and can be used by applications that are not well-known. Ports 49152 to 65535 are known as dynamic or private ports and can be used by applications for temporary purposes.
+#### Port addressing
+Ports are 16-bit numbers (ranging from `0` to `65535`) used to identify specific application processes running on a host.
 
-#### UDP
+| Port range | Classification | Purpose / examples |
+| :--- | :--- | :--- |
+| **0 – 1023** | Well-known ports | Reserved for standard services (e.g., HTTP: `80`, HTTPS: `443`, FTP: `21`) |
+| **1024 – 49151** | Registered ports | Used by third-party applications and user-installed software |
+| **49152 – 65535** | Dynamic / private | Temporary ports allocated on-the-fly by the OS for outbound client connections |
 
-RFC 768. Simplest possible transport protocol which provides data delivery. UDP works with datagrams which contain two parts: a header and a payload. The header contains the source and destination ports, as well as the length of the datagram and a checksum for error detection. The payload contains the actual data being transmitted. UDP is a connectionless protocol, which means that it does not establish a connection before sending data. Not having an established connection means that there is no guarantee of delivery, ordering, or error checking because there is no acknowledgement mechanism for the send to know if the data was received successfully. However, UDP is faster and more efficient than TCP because it has less overhead and does not require the establishment of a connection. It is commonly used for applications that require low latency and can tolerate some loss of data, such as video streaming, online gaming, and voice over IP (VoIP).
+---
 
-#### TCP
+### Transport protocols
 
-RFC 793. When applications between two hosts want to communicate with each other, they need to establish a connection through the internet. What you want is a reliable connection for that communication but the internet is an unreliable network and can lose packets, deliver them out of order etc.
+#### 1. UDP (User Datagram Protocol) — *RFC 768*
 
-#### Quick UDP Internet Connections (QUIC)
+UDP is the simplest possible transport protocol. It operates using **datagrams** and provides a lightweight, "best-effort" delivery service.
 
-TBW
+* **The UDP header:** A minimal 8-byte header containing four fields: **source port**, **destination port**, **length**, and a **checksum** (used for basic error detection).
+* **Connectionless nature:** UDP transmits data instantly without performing an initial handshake to establish a formal connection state.
+* **The structural tradeoff:** Because it lacks an acknowledgement mechanism, UDP offers **no guarantees** regarding delivery confirmation, packet packet ordering, or error recovery. If a checksum fails at the destination, the packet is simply dropped. However, bypassing this overhead makes UDP exceptionally fast and low-latency.
+* **Common uses:** Video streaming, online gaming, and Voice over IP (VoIP)—scenarios where immediate delivery matters more than an occasional lost frame.
+
+#### 2. TCP (Transmission Control Protocol) — *RFC 793*
+
+When applications on different hosts communicate, they typically require an assured, reliable connection. However, the underlying network layer (IP) only offers a best-effort delivery service that can drop, delay, or duplicate packets. TCP acts as an intelligent layer built over this unreliable foundation to provide an ordered, error-checked data stream.
+
+*(Section details to be written)*
+
+#### 3. QUIC (Quick UDP Internet Connections)
+*(Section details to be written)*
+
+---
+
+## Terminology
+
+* **Packet / datagram:** A fundamental unit of data formatted for transmission over a network. It consists of control information (such as source and destination addresses) and user data (the payload).
+
+## Resources behind this note
+
+1. **Book:** *Computer Networking: A Top-Down Approach* by Kurose and Ross (9th edition, 2025)
+2. **Video:** [Computerphile's series on networking basics with Richard G Clegg](https://www.youtube.com/watch?v=eelvWAURfdI&list=PLzH6n4zXuckpvez0PrA5J2Wv--g_vyVs8&index=5)
