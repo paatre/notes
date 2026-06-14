@@ -31,6 +31,12 @@ Devices on the internet run **protocols** that control the sending and receiving
 
 It's important that every device on the internet can interoperate. This is achieved with standards. **Internet standards** are developed and published by the Internet Engineering Task Force (IETF) in the form of **request for comments (RFC)** documents. They tend to be technical and detailed, but they are the definitive source for how protocols and systems should work. They define protocols such as TCP, IP, HTTP and SMTP.
 
+## Network protocols
+
+> A protocol defines the format and the order of messages exchanged between two or more communicating entities, as well as the actions taken on the transmission and/or receipt of a message or other event.
+
+What is a *protocol*? Between humans, when we talk about a protocol, we usually mean a set of implicit or explicit rules that dictate how we interact with each other in different settings. For example, we have different protocols for greeting someone in person vs. sending an email. In the context of computer networks, a protocol is the same thing: how devices on a network communicate with each other. For example, hardware-implemented protocols like Ethenret and Wi-Fi control the flow of bits on the "wire" between two network interface cards; congestion-control protocols control the rate at which packets are transmitted between two end systems; protocols in routers determine a packet's path from source to destination.
+
 ## Architectural models: OSI vs. TCP/IP
 
 To design and understand network systems, we use conceptual frameworks. The two most prominent are the theoretical **OSI model** (7 layers) and the practical **TCP/IP model** (4 layers).
@@ -44,8 +50,6 @@ To design and understand network systems, we use conceptual frameworks. The two 
 | **3** | Network | Routing, path selection, global addressing | **IP** | Layer 2: **Network** |
 | **2** | Data link | Local node-to-node delivery, framing | Ethernet, Wi-Fi | Layer 1: **Link** *(Combines OSI 1, 2)* |
 | **1** | Physical | Raw binary transmission over physical media | Cables, Radio waves | Layer 1: **Link** |
-
-
 
 > **A historical note:**
 > While the OSI model was being developed by committee in the 1970s and 1980s, the **TCP/IP model** was already being built and deployed by the US Department of Defense for ARPANET/DARPA projects. Because of its real-world implementation and rapid adoption, TCP/IP became the internet standard. Today, the OSI model is used primarily as a theoretical reference.
@@ -94,7 +98,8 @@ When applications on different hosts communicate, they typically require an assu
 ## Terminology
 
 * Host / end system: a device that is connected to a network and can send or receive data (e.g., computers, smartphones, servers).
-* **Packet / datagram:** A fundamental unit of data formatted for transmission over a network. It consists of control information (such as source and destination addresses) and user data (the payload). Packet is usually talked in the transport layer, while datagram is usually talked in the network layer.
+* Packet / datagram: A fundamental unit of data formatted for transmission over a network. It consists of control information (such as source and destination addresses) and user data (the payload). Packet is usually talked in the transport layer, while datagram is usually talked in the network layer.
+* Protocol: A set of rules and conventions that govern how data is transmitted and received across a network.
 
 ## Resources behind this note
 
