@@ -17,6 +17,20 @@ Before diving into the models, here is a snapshot of what each primary layer is 
 
 ---
 
+## How the internet works: a high-level overview
+
+Internet is a global network of interconnected networks, and each network is made up of devices, hosts or end systems, that communicate with each other on the network and across the internet. The ends systems are connected together by a network of **communication links** and **packet switches**, and these links transmit data with the transimission rate which is measured in bits per second (bps).
+
+The data that is transmitted is organized and segmented into smaller chunks called **packets**. Each packet contains header and the data segment called a payload. After the packet is received at the destination, the packet is reassembled into the original data.
+
+A packet switch receives a packet through an incoming communication link and forwards the packet to an outgoing communication link. The two most prominent types of packet switches are **routers** and **link-layer switches**. Link-layer switches are typically used in access networks to connect end system to the network, while routers are typically used in the netowork core to interconnect different networks and forward packets across the internet. The sequence of communication links and packet switches that a packet traverses from source to destination is called a **route* or a **path**.
+
+End systems access the internet through Internet Service Providers (ISPs) which provide connectivity to the internet. There are different types of ISPs, such as **Tier 1** (global backbone providers), **Tier 2** (regional providers), and **Tier 3** (local providers). Each ISP is like a local netowork that connects to other ISPs on the same tier or higher tiers depending where the data is going.
+
+Devices on the internet run **protocols** that control the sending and receiving of data within the internet. The **Transmission Control Protocol (TCP)** and the **Internet Protocol (IP)** are two of the most important protocols in the internet. The IP protocol specifies the format of the packets that are sent and received among routers and end systems. The internet's principal protocols are collectively known as **TCP/IP**. 
+
+It's important that every device on the internet can interoperate. This is achieved with standards. **Internet standards** are developed and published by the Internet Engineering Task Force (IETF) in the form of **request for comments (RFC)** documents. They tend to be technical and detailed, but they are the definitive source for how protocols and systems should work. They define protocols such as TCP, IP, HTTP and SMTP.
+
 ## Architectural models: OSI vs. TCP/IP
 
 To design and understand network systems, we use conceptual frameworks. The two most prominent are the theoretical **OSI model** (7 layers) and the practical **TCP/IP model** (4 layers).
@@ -79,6 +93,7 @@ When applications on different hosts communicate, they typically require an assu
 
 ## Terminology
 
+* Host / end system: a device that is connected to a network and can send or receive data (e.g., computers, smartphones, servers).
 * **Packet / datagram:** A fundamental unit of data formatted for transmission over a network. It consists of control information (such as source and destination addresses) and user data (the payload).
 
 ## Resources behind this note
