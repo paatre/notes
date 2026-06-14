@@ -94,7 +94,7 @@ When applications on different hosts communicate, they typically require an assu
 ## Terminology
 
 * Host / end system: a device that is connected to a network and can send or receive data (e.g., computers, smartphones, servers).
-* **Packet / datagram:** A fundamental unit of data formatted for transmission over a network. It consists of control information (such as source and destination addresses) and user data (the payload).
+* **Packet / datagram:** A fundamental unit of data formatted for transmission over a network. It consists of control information (such as source and destination addresses) and user data (the payload). Packet is usually talked in the transport layer, while datagram is usually talked in the network layer.
 
 ## Resources behind this note
 
