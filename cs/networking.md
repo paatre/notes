@@ -31,6 +31,10 @@ Devices on the internet run **protocols** that control the sending and receiving
 
 It's important that every device on the internet can interoperate. This is achieved with standards. **Internet standards** are developed and published by the Internet Engineering Task Force (IETF) in the form of **request for comments (RFC)** documents. They tend to be technical and detailed, but they are the definitive source for how protocols and systems should work. They define protocols such as TCP, IP, HTTP and SMTP.
 
+## How the internet works: a service provider's perspective
+
+Instead of looking at the internet from the hardware perspective, we can also say that the internet is a collection of services that are provided to applications. The services provide programming interfaces that applications can use to send and receive data across the internet. It's like a postal service with multiple different delivery and service options. And as this note goes further down the stack and into hands-on details, we will see how these services are implemented and how they work together to provide the functionality that applications rely on.
+
 ## Network protocols
 
 > A protocol defines the format and the order of messages exchanged between two or more communicating entities, as well as the actions taken on the transmission and/or receipt of a message or other event.
